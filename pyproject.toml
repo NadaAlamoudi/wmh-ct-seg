@@ -1,0 +1,110 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wmhct"
+version = "1.0.0"
+description = "Segmentation of white matter hypoattenuations in non-contrast CT: pipeline, evaluation and statistics"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-3.0-or-later" }
+authors = [
+    { name = "Nada Alamoudi", email = "n.m.alamoudi@ed.ac.uk" },
+]
+keywords = [
+    "white matter hyperintensities",
+    "white matter hypoattenuation",
+    "computed tomography",
+    "segmentation",
+    "small vessel disease",
+    "nnU-Net",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.8",
+    "pandas>=1.4",
+    "nibabel>=4.0",
+    "SimpleITK>=2.1",
+    "pydicom>=2.3",
+    "matplotlib>=3.5",
+    "seaborn>=0.12",
+    "scikit-learn>=1.1",
+    "statsmodels>=0.13",
+    "openpyxl>=3.0",
+    "tqdm>=4.62",
+    "statannotations>=0.5",
+]
+
+[project.optional-dependencies]
+nnunet = ["nnunetv2>=2.2"]
+dev = ["pytest>=7.0", "flake8>=5.0"]
+
+[project.urls]
+Homepage = "https://github.com/NadaAlamoudi/wmh-ct-seg"
+
+# One console script per module. After `pip install .` these are on the PATH, so the
+# pipeline can be run without knowing the package layout. Grouped by manuscript section.
+[project.scripts]
+# --- Methods 2.3: data preparation, preprocessing, registration ---------------
+wmhct-convert-dicom       = "wmhct.data_prep.convert_dicom_to_nifti:main"
+wmhct-sort-bids           = "wmhct.data_prep.sort_nifti_to_bids:main"
+wmhct-classify-sequences  = "wmhct.data_prep.apply_sequence_classifier:main"
+wmhct-pair-labels         = "wmhct.data_prep.pair_flair_and_wmh_masks:main"
+wmhct-clip-hu             = "wmhct.preprocessing.clip_hu_range:main"
+wmhct-window-fixed        = "wmhct.preprocessing.brain_window_fixed:main"
+wmhct-window-gmm          = "wmhct.preprocessing.brain_window_gmm_corrected_hu:main"
+wmhct-skull-strip         = "wmhct.preprocessing.skull_strip_synthstrip:main"
+wmhct-register-flair2ct   = "wmhct.registration.register_flair_to_ct:main"
+wmhct-register-masks2ct   = "wmhct.registration.register_wmh_masks_to_ct:main"
+wmhct-register-ct2tmpl    = "wmhct.registration.register_ct_to_template:main"
+wmhct-register-masks2tmpl = "wmhct.registration.register_masks_to_template:main"
+
+# --- Methods 2.5-2.7: model ---------------------------------------------------
+wmhct-dataset-json        = "wmhct.nnunet.generate_dataset_json:main"
+wmhct-make-splits         = "wmhct.nnunet.make_custom_splits:main"
+wmhct-resample-normalise  = "wmhct.nnunet.resample_and_normalise:main"
+wmhct-inverse-to-flair    = "wmhct.back_projection.inverse_transform_to_flair:main"
+
+# --- Measurement: masks to numbers -------------------------------------------
+wmhct-per-case-metrics    = "wmhct.evaluation.compute_per_case_metrics:main"
+wmhct-summarise-experiments = "wmhct.evaluation.summarise_experiment_metrics:main"
+wmhct-volumes             = "wmhct.evaluation.compute_wmh_volumes:main"
+wmhct-wmh-progression     = "wmhct.evaluation.compute_wmh_progression_masks:main"
+
+# --- Statistics: Table V, Figures 5-11 ----------------------------------------
+wmhct-burden-class-figures = "wmhct.statistics.dice_mae_by_burden_class:main"
+wmhct-model5-vs-model7    = "wmhct.statistics.model5_vs_model7_differences:main"
+wmhct-fold-composition    = "wmhct.statistics.fold_burden_composition:main"
+wmhct-figures-10-11       = "wmhct.statistics.volume_agreement_figures_10_11:main"
+wmhct-volume-ccc          = "wmhct.statistics.volume_correlation_ccc:main"
+
+# --- Statistics: Sections 3.5-3.7 --------------------------------------------
+wmhct-modality-comparison = "wmhct.statistics.modality_vs_time_group_comparison:main"
+wmhct-change-regression   = "wmhct.statistics.wmh_change_regression:main"
+wmhct-stroke-dice         = "wmhct.statistics.stroke_lesion_effect_on_dice:main"
+wmhct-stroke-overlap      = "wmhct.statistics.wmh_stroke_overlap:main"
+wmhct-lesion-excluded     = "wmhct.statistics.lesion_excluded_regression:main"
+
+# --- Statistics: Section 3.8, perivascular spaces ----------------------------
+wmhct-pvs-density         = "wmhct.statistics.pvs.pvs_density:main"
+wmhct-wmh-metrics-by-roi  = "wmhct.statistics.pvs.wmh_metrics_within_roi:main"
+wmhct-pvs-associations    = "wmhct.statistics.pvs.pvs_fazekas_associations:main"
+
+# --- Utilities ---------------------------------------------------------------
+wmhct-rename-masks        = "wmhct.tools.rename_masks:main"
+wmhct-check-checkpoints   = "wmhct.tools.check_checkpoints:main"
+wmhct-wmh-volume          = "wmhct.tools.wmh_volume_from_mask:main"
+wmhct-build-release-table = "wmhct.tools.build_release_table:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+wmhct = ["py.typed"]

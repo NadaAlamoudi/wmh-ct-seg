@@ -1,0 +1,5 @@
+# Everything in this folder is participant-level data from governed cohorts
+# (MSS3, IST-3, CIM). None of it may be committed or included in a public deposit.
+*
+!.gitignore
+!MANIFEST.md

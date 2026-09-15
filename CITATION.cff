@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+title: "wmh-ct-seg: segmentation of white matter hypoattenuations in non-contrast CT"
+message: "If you use this code, please cite the accompanying article."
+type: software
+authors:
+  - family-names: Alamoudi
+    given-names: Nada
+    affiliation: "Institute for Adaptive and Neural Computation, School of Informatics, University of Edinburgh"
+  - family-names: "Valdes Hernandez"
+    given-names: "Maria del C."
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Seth
+    given-names: Sohan
+    affiliation: "Institute for Adaptive and Neural Computation, School of Informatics, University of Edinburgh"
+  - family-names: Jin
+    given-names: Benjamin
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Sakka
+    given-names: Eleni
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Arteaga-Reyes
+    given-names: Carmen
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: "Jaime Garcia"
+    given-names: Daniela
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Cheng
+    given-names: Yajun
+    affiliation: "Department of Neurology, West China Hospital, Sichuan University"
+  - family-names: Jochems
+    given-names: "Angela C. C."
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Mair
+    given-names: Grant
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Wardlaw
+    given-names: "Joanna M."
+    affiliation: "Center for Clinical Brain Sciences, University of Edinburgh"
+  - family-names: Bernabeu
+    given-names: "Miguel O."
+    affiliation: "Usher Institute, Center for Medical Informatics, University of Edinburgh"
+license: GPL-3.0-or-later
+repository-code: "https://github.com/NadaAlamoudi/wmh-ct-seg"
+version: "1.0.0"
+keywords:
+  - white matter hyperintensities
+  - white matter hypoattenuation
+  - computed tomography
+  - segmentation
+  - cerebral small vessel disease
+  - nnU-Net
+preferred-citation:
+  type: article
+  title: "AI-Based Pipeline for the Segmentation of White Matter Hypoattenuations in CT Scans: A Design-Choice Validation Study"
+  journal: "PLOS Digital Health"
+  year: 2026
+  notes: "Under revision"
+  authors:
+    - family-names: Alamoudi
+      given-names: Nada
+    - family-names: "Valdes Hernandez"
+      given-names: "Maria del C."
+    - family-names: Seth
+      given-names: Sohan
+    - family-names: Jin
+      given-names: Benjamin
+    - family-names: Sakka
+      given-names: Eleni
+    - family-names: Arteaga-Reyes
+      given-names: Carmen
+    - family-names: "Jaime Garcia"
+      given-names: Daniela
+    - family-names: Cheng
+      given-names: Yajun
+    - family-names: Jochems
+      given-names: "Angela C. C."
+    - family-names: Mair
+      given-names: Grant
+    - family-names: Wardlaw
+      given-names: "Joanna M."
+    - family-names: Bernabeu
+      given-names: "Miguel O."

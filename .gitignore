@@ -1,0 +1,66 @@
+# Local testing configuration. If you copy a config_local.py in from the working tree it
+# contains real internal storage paths and must never be committed. src/wmhct/config.py
+# is the public version and reads everything from environment variables.
+config_local.py
+env_local.sh
+
+# Environments
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Imaging data and model weights must never be committed.
+*.nii
+*.nii.gz
+*.dcm
+*.mat
+*.pth
+*.pt
+*.ckpt
+
+# Pipeline outputs
+# Written as results/* rather than results/ so the negations can take effect: git will
+# not re-include a file inside a wholly excluded directory.
+results/*
+!results/README.md
+!results/S1_crossvalidation_results.csv
+nnUNet_raw/
+nnUNet_preprocessed/
+nnUNet_results/
+
+# data/ holds participant-level data from governed cohorts. Ignore its contents but
+# keep the folder itself, its own .gitignore and the manifest that says what goes in it.
+# Written as data/* rather than data/ so the negations below can take effect.
+data/*
+!data/.gitignore
+!data/MANIFEST.md
+
+# Generated figures
+*.png
+*.pdf
+*.svg
+!docs/**/*.png
+
+# Tabular outputs may contain participant identifiers.
+# Commit a specific file only after confirming it is safe to release.
+*.csv
+*.xlsx
+*.xls
+
+# The one released table. This negation must come AFTER *.csv above: in .gitignore the
+# last matching pattern wins, so a negation placed earlier is silently overridden.
+!results/S1_crossvalidation_results.csv
